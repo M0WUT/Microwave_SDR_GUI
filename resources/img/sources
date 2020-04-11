@@ -1,0 +1,23 @@
+# LICENCES
+LGPL v2.1 (included as LGPLv2-1.txt): https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html
+GPL v2 (included as GPLv2.txt): https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+# Individual image sources
+icon_home.png:
+	Source: http://icon-king.com
+	Author: David Vignoni / ICON KING
+	Licence: LGPL v2.1
+	Downloaded from: https://commons.wikimedia.org/wiki/File:Nuvola_filesystems_folder_home.png
+
+icon_settings.png:
+	Source: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/data/icons/hicolor/scalable/apps/org.gnome.Settings.svg
+	Author: https://gitlab.gnome.org/snwh
+	Licence: GPL v2
+	Downloaded from: https://commons.wikimedia.org/wiki/File:GNOME_Settings_icon.svg
+
+icon_info:
+	Source: https://commons.wikimedia.org/wiki/File:Information_magnifier_icon.png
+	Author: Wikipedia user - Huji
+	Licence: File released into the public domain
+	Downloaded from: https://commons.wikimedia.org/wiki/File:Information_magnifier_icon.png
+	

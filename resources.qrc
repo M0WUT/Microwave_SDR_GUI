@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/img/icon_info.png</file>
+        <file>resources/img/icon_home.png</file>
+        <file>resources/img/icon_settings.png</file>
+        <file>resources/img/m1geo.png</file>
+        <file>resources/img/m0wut.png</file>
+        <file>resources/img/m0vfc.png</file>
+        <file>resources/img/icon_tx_disabled.png</file>
+        <file>resources/img/icon_rx_disabled.png</file>
+        <file>resources/img/icon_rx_enabled.png</file>
+        <file>resources/img/icon_tx_active.png</file>
+        <file>resources/img/icon_tx_enabled.png</file>
+    </qresource>
+</RCC>
