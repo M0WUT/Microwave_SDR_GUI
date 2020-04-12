@@ -14,6 +14,7 @@ class number_keypad : public QDialog
 
 public:
     explicit number_keypad(QWidget *parent = nullptr);
+    unsigned long long get_freq();
     ~number_keypad();
 
 private slots:

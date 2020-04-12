@@ -10,6 +10,11 @@ number_keypad::number_keypad(QWidget *parent) :
     ui->label_freq->setText(freqString);
 }
 
+unsigned long long number_keypad::get_freq()
+{
+    return(this->freqString.toULongLong());
+}
+
 number_keypad::~number_keypad()
 {
     delete ui;
@@ -92,7 +97,6 @@ void number_keypad::on_button_BS_clicked()
 void number_keypad::on_button_H_clicked()
 {
     update_freq(1);
-
 }
 
 void number_keypad::on_button_K_clicked()
@@ -129,6 +133,5 @@ long number_keypad::update_freq(int exponent){
         this->freqString += "0";
 
     qDebug() << freqString;
-    this->close();
-    return 0;
+    this->accept();
 }

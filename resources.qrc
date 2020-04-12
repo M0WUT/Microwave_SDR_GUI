@@ -11,5 +11,7 @@
         <file>resources/img/icon_rx_enabled.png</file>
         <file>resources/img/icon_tx_active.png</file>
         <file>resources/img/icon_tx_enabled.png</file>
+        <file>resources/Waree-Bold.ttf</file>
+        <file>resources/Waree.ttf</file>
     </qresource>
 </RCC>

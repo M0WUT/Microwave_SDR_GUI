@@ -5,12 +5,14 @@
 #include <QTextStream>
 #include <QPixmap>
 #include <QFont>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    QFont font("Courier", 16);
+    QFontDatabase::addApplicationFont(":/resources/Waree.ttf");
+    QFontDatabase::addApplicationFont(":/resources/Waree-Bold.ttf");
+    QFont font("Waree", 16);
     QApplication::setFont(font);
 
     // Set dark theme

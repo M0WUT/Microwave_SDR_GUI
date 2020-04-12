@@ -8,6 +8,10 @@
 #include "src/json/json.hpp"
 #include <QMessageBox>
 #include <QDebug>
+#include "vfo.h"
+#include "number_keypad.h"
+#include <QFontDatabase>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,7 +32,20 @@ private slots:
 
     void on_button_A_freq_clicked();
 
+    void on_button_A_rx_clicked();
+
+    void on_button_A_tx_clicked();
+
+    void on_button_B_rx_clicked();
+
+    void on_button_B_tx_clicked();
+
+    void on_button_B_freq_clicked();
+
 private:
     Ui::MainWindow *ui;
+    vfo *vfoA;
+    vfo *vfoB;
+
 };
 #endif // MAINWINDOW_H

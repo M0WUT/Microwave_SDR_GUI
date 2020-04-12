@@ -18,12 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    number_keypad.cpp
+    number_keypad.cpp \
+    vfo.cpp
 
 HEADERS += \
     mainwindow.h \
     number_keypad.h \
-    src/json/json.hpp
+    src/json/json.hpp \
+    vfo.h
 
 FORMS += \
     mainwindow.ui \
