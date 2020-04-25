@@ -12,7 +12,7 @@ number_keypad::number_keypad(QWidget *parent) :
 
 unsigned long long number_keypad::get_freq()
 {
-    return(this->freqString.toULongLong());
+    return(this->freq);
 }
 
 number_keypad::~number_keypad()
@@ -96,42 +96,28 @@ void number_keypad::on_button_BS_clicked()
 
 void number_keypad::on_button_H_clicked()
 {
-    update_freq(1);
+    update_freq(this->freqString.toFloat(), 0);
 }
 
 void number_keypad::on_button_K_clicked()
 {
-    update_freq(3);
+    update_freq(this->freqString.toFloat(), 3);
 }
 
 void number_keypad::on_button_M_clicked()
 {
-    update_freq(6);
+    update_freq(this->freqString.toFloat(), 6);
 }
 
 void number_keypad::on_button_G_clicked()
 {
-    update_freq(9);
+    update_freq(this->freqString.toFloat(), 9);
 }
 
-long number_keypad::update_freq(int exponent){
+void number_keypad::update_freq(float mantissa, int exponent){
 
-    // Search for decimal point
-    int dp_index = this->freqString.indexOf(".");
-    int offset = 0;
+    this->freq = mantissa * pow(10, exponent);
 
-
-    if(dp_index != -1){
-        // Decimal point found
-        offset = this->freqString.length() - dp_index - 1;
-        this->freqString.remove(dp_index, 1);
-    }
-
-
-    // Pad zeros on the end
-    for(int i = 0; i < (exponent - offset); i++)
-        this->freqString += "0";
-
-    qDebug() << freqString;
+    qDebug() << this->freq;
     this->accept();
 }

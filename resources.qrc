@@ -13,5 +13,6 @@
         <file>resources/img/icon_tx_enabled.png</file>
         <file>resources/Waree-Bold.ttf</file>
         <file>resources/Waree.ttf</file>
+        <file>resources/img/scale_s_meter.png</file>
     </qresource>
 </RCC>

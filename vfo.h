@@ -4,6 +4,9 @@
 #include <QPushButton>
 #include <QPixmap>
 #include "number_keypad.h"
+#include <QProgressBar>
+#include <QLabel>
+#include <QStatusBar>
 
 
 #define MIN_FREQ ((unsigned long long) 100000)
@@ -17,16 +20,23 @@ public:
         QPushButton *freqButton,
         QPushButton *rxButton,
         QPushButton *txButton,
+        QLabel *fcLabel,
         QPushButton *fcButton,
+        QLabel *bwLabel,
         QPushButton *bwButton,
-        QPushButton *modeButton
+        QPushButton *modeButton,
+        QLabel *meterLabel,
+        QPushButton *meterScale,
+        QProgressBar *meter,
+        QLabel *ritLabel,
+        QLabel *xitLabel,
+        QStatusBar *statusBar
     );
 
     ~vfo();
     typedef enum {AM, FM, USB, LSB, DATA} mode_t;
     void set_mode(mode_t mode);
     void set_freq(unsigned long long freq);
-    void set_freq(QString freq);
     void set_tx_enabled(bool x);
     void set_rx_enabled(bool x);
     void toggle_tx_enabled();
@@ -34,6 +44,9 @@ public:
     bool get_tx_enabled();
     bool get_rx_enabled();
     void run_keypad(QWidget *parent = nullptr);
+    void set_s_meter(int x);
+    void set_rit(int x);
+    void set_xit(int x);
 
 private:
 
@@ -41,9 +54,17 @@ private:
     QPushButton *freqButton;
     QPushButton *rxButton;
     QPushButton *txButton;
+    QLabel *fcLabel;
     QPushButton *fcButton;
+    QLabel *bwLabel;
     QPushButton *bwButton;
     QPushButton *modeButton;
+    QLabel *meterLabel;
+    QPushButton *meterScale;
+    QProgressBar *meter;
+    QLabel *ritLabel;
+    QLabel *xitLabel;
+    QStatusBar* statusBar;
 
     // VFO freq
     unsigned long long freq;
@@ -60,6 +81,10 @@ private:
     // AF DSP settings
     int fc;
     int bw;
+
+    //RIT / XIT settings
+    int rit;
+    int xit;
 };
 
 #endif // VFO_H

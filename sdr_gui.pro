@@ -45,3 +45,12 @@ INCLUDEPATH += /home/dan/SDR_Petalinux_Project/images/linux/sdk/sysroots/cortexa
 INCLUDEPATH += /home/dan/SDR_Petalinux_Project/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets
 INCLUDEPATH += /home/dan/SDR_Petalinux_Project/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/c++/8.2.0
 INCLUDEPATH += /home/dan/SDR_Petalinux_Project/images/linux/sdk/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/c++/8.2.0/arm-xilinx-linux-gnueabi
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/qwt-6.1.3/lib/release/ -lqwt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/qwt-6.1.3/lib/debug/ -lqwt
+else:unix: LIBS += -L$$PWD/../../../../usr/local/qwt-6.1.3/lib/ -lqwt
+
+CONFIG += qwt
+
+INCLUDEPATH += $$PWD/../../../../usr/local/qwt-6.1.3/include
+DEPENDPATH += $$PWD/../../../../usr/local/qwt-6.1.3/include

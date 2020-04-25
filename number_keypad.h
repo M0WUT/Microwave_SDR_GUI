@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <math.h>
 
 namespace Ui {
 class number_keypad;
@@ -54,7 +55,8 @@ private slots:
 private:
     Ui::number_keypad *ui;
     QString freqString;
-    long update_freq(int exponent);
+    void update_freq(float mantissa, int exponent);
+    unsigned long long freq;
 };
 
 #endif // NUMBER_KEYPAD_H

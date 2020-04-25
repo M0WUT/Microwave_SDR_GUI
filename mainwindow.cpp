@@ -10,28 +10,45 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 60px; width: 60px; padding-top: -5px; padding-bottom: 5px }");
+
+    // Initialise VFOs
     vfoA = new vfo(
         ui->button_A_freq,
         ui->button_A_rx,
         ui->button_A_tx,
+        ui->label_A_fc,
         ui->button_A_fc,
+        ui->label_A_bw,
         ui->button_A_bw,
-        ui->button_A_mode
+        ui->button_A_mode,
+        ui->label_A_meter,
+        ui->button_A_meterScale,
+        ui->meter_A,
+        ui->label_A_rit,
+        ui->label_A_xit,
+        ui->statusbar
     );
 
     vfoB = new vfo(
         ui->button_B_freq,
         ui->button_B_rx,
         ui->button_B_tx,
+        ui->label_B_fc,
         ui->button_B_fc,
+        ui->label_B_bw,
         ui->button_B_bw,
-        ui->button_B_mode
+        ui->button_B_mode,
+        ui->label_B_meter,
+        ui->button_B_meterScale,
+        ui->meter_B,
+        ui->label_B_rit,
+        ui->label_B_xit,
+        ui->statusbar
     );
 
+    vfoA->set_freq(24e9);
 
-    ui->statusbar->showMessage("Main window loaded successfully", 5000);
-
-    /*
     // Read variables that will only be set once per boot
     FILE *statusFile_p;
     statusFile_p = fopen("/dev/status", "rw");
@@ -46,11 +63,9 @@ MainWindow::MainWindow(QWidget *parent)
     json j;
     i >> j;
     double x = j["bitstreamVersion"];
-    ui->Button_bitstreamVersion->setNum(x);*/
+    ui->label_bitstreamVersion->setNum(x);
 
-
-
-
+    ui->statusbar->showMessage("Main window loaded successfully", 5000);
 
 }
 
@@ -125,4 +140,9 @@ void MainWindow::on_button_B_tx_clicked()
 void MainWindow::on_button_B_freq_clicked()
 {
     vfoB->run_keypad(this);
+}
+
+void MainWindow::on_button_A_meterScale_clicked()
+{
+    ;
 }

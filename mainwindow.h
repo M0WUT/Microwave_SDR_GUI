@@ -13,6 +13,7 @@
 #include <QFontDatabase>
 
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -41,6 +42,8 @@ private slots:
     void on_button_B_tx_clicked();
 
     void on_button_B_freq_clicked();
+
+    void on_button_A_meterScale_clicked();
 
 private:
     Ui::MainWindow *ui;
