@@ -10,8 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 60px; width: 60px; padding-top: -5px; padding-bottom: 5px }");
-
     // Initialise VFOs
     vfoA = new vfo(
         ui->button_A_freq,
@@ -27,8 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
         ui->meter_A,
         ui->label_A_rit,
         ui->label_A_xit,
-        ui->statusbar
+        ui->statusbar,
+        "/dev/fft_dma",
+        ui->A_FFT,
+        ui->A_waterfall
     );
+    /*
 
     vfoB = new vfo(
         ui->button_B_freq,
@@ -45,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->label_B_rit,
         ui->label_B_xit,
         ui->statusbar
-    );
+    );*/
 
     vfoA->set_freq(24e9);
 

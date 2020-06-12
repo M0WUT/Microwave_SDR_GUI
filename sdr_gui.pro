@@ -16,16 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dma_worker.cpp \
     main.cpp \
     mainwindow.cpp \
     number_keypad.cpp \
-    vfo.cpp
+    spectrumdisplay.cpp \
+    vfo.cpp \
+    waterfalldata.cpp \
+    waterfallplot.cpp
 
 HEADERS += \
+    dma_worker.h \
     mainwindow.h \
     number_keypad.h \
+    spectrumdisplay.h \
     src/json/json.hpp \
-    vfo.h
+    vfo.h \
+    waterfalldata.h \
+    waterfallplot.h
 
 FORMS += \
     mainwindow.ui \

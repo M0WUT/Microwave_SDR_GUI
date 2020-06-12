@@ -1,6 +1,6 @@
 #include "vfo.h"
 
-vfo::vfo(
+vfo::vfo (
     QPushButton *freqButton,
     QPushButton *rxButton,
     QPushButton *txButton,
@@ -14,7 +14,10 @@ vfo::vfo(
     QProgressBar *meter,
     QLabel *ritLabel,
     QLabel *xitLabel,
-    QStatusBar *statusBar
+    QStatusBar *statusBar,
+    const char *dmaFileName,
+    QwtPlot *fft,
+    WaterfallPlot *waterfall
 )
 {
     // Copy GUI references into self
@@ -32,6 +35,7 @@ vfo::vfo(
     this->ritLabel = ritLabel;
     this->xitLabel = xitLabel;
     this->statusBar = statusBar;
+    this->spectrum = new spectrumDisplay(dmaFileName, fft, waterfall);
 
 
     QString filename = ":resources/img/scale_s_meter";
@@ -49,7 +53,6 @@ vfo::vfo(
     this->set_xit(0);
 
     this->set_freq(100e6);
-
 }
 
 vfo::~vfo()

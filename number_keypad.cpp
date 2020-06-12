@@ -118,6 +118,6 @@ void number_keypad::update_freq(float mantissa, int exponent){
 
     this->freq = mantissa * pow(10, exponent);
 
-    qDebug() << this->freq;
+    //qDebug() << this->freq;
     this->accept();
 }

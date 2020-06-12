@@ -7,14 +7,21 @@
 #include <QProgressBar>
 #include <QLabel>
 #include <QStatusBar>
+#include <qwt_plot.h>
+#include "spectrumdisplay.h"
+#include <QThread>
+#include <qwt_plot.h>
+#include <qwt_plot_curve.h>
 
 
 #define MIN_FREQ ((unsigned long long) 100000)
 #define MAX_FREQ ((unsigned long long) 99000000000)
 
 
-class vfo
-{
+class vfo : public QObject {
+
+    Q_OBJECT
+
 public:
     vfo(
         QPushButton *freqButton,
@@ -30,8 +37,11 @@ public:
         QProgressBar *meter,
         QLabel *ritLabel,
         QLabel *xitLabel,
-        QStatusBar *statusBar
-    );
+        QStatusBar *statusBar,
+        const char *dmaFileName,
+        QwtPlot *fft,
+        WaterfallPlot *waterfall
+);
 
     ~vfo();
     typedef enum {AM, FM, USB, LSB, DATA} mode_t;
@@ -65,6 +75,8 @@ private:
     QLabel *ritLabel;
     QLabel *xitLabel;
     QStatusBar* statusBar;
+    spectrumDisplay *spectrum;
+
 
     // VFO freq
     unsigned long long freq;
@@ -85,6 +97,7 @@ private:
     //RIT / XIT settings
     int rit;
     int xit;
+
 };
 
 #endif // VFO_H

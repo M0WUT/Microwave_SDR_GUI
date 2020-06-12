@@ -56,6 +56,15 @@
     <property name="spacing">
      <number>0</number>
     </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
     <property name="bottomMargin">
      <number>0</number>
     </property>
@@ -75,7 +84,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
+        <width>1024</width>
         <height>580</height>
        </size>
       </property>
@@ -88,7 +97,7 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="tabPosition">
-       <enum>QTabWidget::West</enum>
+       <enum>QTabWidget::North</enum>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
@@ -106,6 +115,12 @@
        <enum>Qt::ElideNone</enum>
       </property>
       <widget class="QWidget" name="tab_home">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <attribute name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/resources/img/icon_home.png</normaloff>:/resources/img/icon_home.png</iconset>
@@ -113,1330 +128,1137 @@
        <attribute name="title">
         <string/>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_13">
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
-          <property name="spacing">
-           <number>2</number>
-          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <property name="sizeConstraint">
-           <enum>QLayout::SetFixedSize</enum>
+           <enum>QLayout::SetMinimumSize</enum>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <property name="spacing">
-             <number>0</number>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_12">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_5">
-                <property name="spacing">
-                 <number>2</number>
-                </property>
-                <property name="leftMargin">
-                 <number>5</number>
-                </property>
-                <property name="rightMargin">
-                 <number>5</number>
-                </property>
-                <item>
-                 <widget class="QWidget" name="VFOA" native="true">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>400</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>400</width>
-                    <height>6000</height>
-                   </size>
-                  </property>
-                  <layout class="QVBoxLayout" name="VFO_A">
-                   <property name="spacing">
-                    <number>2</number>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QWidget" name="VFOA" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="VFO_A">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetDefaultConstraint</enum>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_A_mode">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>SSB</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_5">
+                 <property name="sizeConstraint">
+                  <enum>QLayout::SetMinimumSize</enum>
+                 </property>
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_A_bw">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeConstraint">
-                    <enum>QLayout::SetDefaultConstraint</enum>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
                    </property>
-                   <property name="leftMargin">
-                    <number>0</number>
+                   <property name="text">
+                    <string>BW:</string>
                    </property>
-                   <property name="topMargin">
-                    <number>0</number>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_A_fc">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="rightMargin">
-                    <number>0</number>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
                    </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
+                   <property name="text">
+                    <string>Fc:</string>
                    </property>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_10">
-                     <property name="spacing">
-                      <number>2</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_A_mode">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>150</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>SSB</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <layout class="QGridLayout" name="gridLayout">
-                       <property name="sizeConstraint">
-                        <enum>QLayout::SetMinimumSize</enum>
-                       </property>
-                       <property name="spacing">
-                        <number>0</number>
-                       </property>
-                       <item row="3" column="0">
-                        <widget class="QLabel" name="label_A_bw">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>BW:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="0">
-                        <widget class="QLabel" name="label_A_fc">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>Fc:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="1">
-                        <widget class="QPushButton" name="button_A_fc">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font/>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">background-color: transparent;
-border: 1px solid transparent;
-Text-align: left</string>
-                         </property>
-                         <property name="text">
-                          <string>1.6k</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <widget class="QPushButton" name="button_A_bw">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font/>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">background-color: transparent;
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QPushButton" name="button_A_bw">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font/>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
 border: 1px solid transparent;
 Text-align: left
 </string>
-                         </property>
-                         <property name="text">
-                          <string>400Hz</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="2">
-                        <widget class="QLabel" name="label_A_rit">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>RIT</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="2">
-                        <widget class="QLabel" name="label_A_xit">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>XIT</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_3">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>15</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="button_A_rx">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
-border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="button_A_tx">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
-border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_15">
-                     <property name="spacing">
-                      <number>5</number>
-                     </property>
-                     <property name="leftMargin">
-                      <number>5</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>5</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_A_freq">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>400</width>
-                         <height>45</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>400</width>
-                         <height>45</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Waree</family>
-                         <pointsize>32</pointsize>
-                         <weight>75</weight>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="acceptDrops">
-                        <bool>false</bool>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">border: 1px solid transparent;
-text-align: right;
-background-color: transparent;
-
-</string>
-                       </property>
-                       <property name="text">
-                        <string>88.888.888.00</string>
-                       </property>
-                       <property name="checkable">
-                        <bool>false</bool>
-                       </property>
-                       <property name="autoDefault">
-                        <bool>false</bool>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_12">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_A_meterScale">
-                       <property name="minimumSize">
-                        <size>
-                         <width>280</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
-border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_7">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>40</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_9">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <spacer name="horizontalSpacer_8">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>18</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QProgressBar" name="meter_A">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>250</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>250</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                       <property name="maximum">
-                        <number>14</number>
-                       </property>
-                       <property name="value">
-                        <number>0</number>
-                       </property>
-                       <property name="textVisible">
-                        <bool>false</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_9">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="label_A_meter">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>60</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>14</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>S9+30</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_13">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>5</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="Line" name="line_2">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>5</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>5</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="lineWidth">
-                   <number>5</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_6">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>5</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QWidget" name="VFOB" native="true">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>400</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <layout class="QVBoxLayout" name="VFO_B">
-                   <property name="spacing">
-                    <number>2</number>
                    </property>
-                   <property name="sizeConstraint">
-                    <enum>QLayout::SetDefaultConstraint</enum>
+                   <property name="text">
+                    <string>400Hz</string>
                    </property>
-                   <property name="leftMargin">
-                    <number>0</number>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QPushButton" name="button_A_fc">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="topMargin">
-                    <number>0</number>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
                    </property>
-                   <property name="rightMargin">
-                    <number>0</number>
+                   <property name="font">
+                    <font/>
                    </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_11">
-                     <property name="spacing">
-                      <number>2</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_B_mode">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>150</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>SSB</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <layout class="QGridLayout" name="gridLayout_4">
-                       <property name="sizeConstraint">
-                        <enum>QLayout::SetMinimumSize</enum>
-                       </property>
-                       <property name="spacing">
-                        <number>2</number>
-                       </property>
-                       <item row="3" column="0">
-                        <widget class="QLabel" name="label_B_bw">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>BW:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="0">
-                        <widget class="QLabel" name="label_B_fc">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>Fc:</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="1">
-                        <widget class="QPushButton" name="button_B_bw">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font/>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">background-color: transparent;
-border: 1px solid transparent;
-Text-align: left
-</string>
-                         </property>
-                         <property name="text">
-                          <string>400Hz</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="1">
-                        <widget class="QPushButton" name="button_B_fc">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font/>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">background-color: transparent;
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
 border: 1px solid transparent;
 Text-align: left</string>
-                         </property>
-                         <property name="text">
-                          <string>1.6k</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="2" column="2">
-                        <widget class="QLabel" name="label_B_rit">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>RIT</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="3" column="2">
-                        <widget class="QLabel" name="label_B_xit">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>27</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>XIT</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_5">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>15</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="button_B_rx">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
+                   </property>
+                   <property name="text">
+                    <string>1.6k</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="label_A_rit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>RIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QLabel" name="label_A_xit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>XIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>15</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="button_A_rx">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
 border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QPushButton" name="button_B_tx">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>55</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="button_A_tx">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
 border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_16">
-                     <property name="spacing">
-                      <number>5</number>
-                     </property>
-                     <property name="leftMargin">
-                      <number>5</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>5</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_B_freq">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>400</width>
-                         <height>45</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>400</width>
-                         <height>45</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Waree</family>
-                         <pointsize>32</pointsize>
-                         <weight>75</weight>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="acceptDrops">
-                        <bool>false</bool>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">border: 1px solid transparent;
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <property name="spacing">
+                <number>5</number>
+               </property>
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_A_freq">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>400</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>400</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Waree</family>
+                   <pointsize>32</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="acceptDrops">
+                  <bool>false</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">border: 1px solid transparent;
 text-align: right;
 background-color: transparent
 
 </string>
-                       </property>
-                       <property name="text">
-                        <string>88.888.888.00</string>
-                       </property>
-                       <property name="checkable">
-                        <bool>false</bool>
-                       </property>
-                       <property name="autoDefault">
-                        <bool>false</bool>
-                       </property>
-                       <property name="default">
-                        <bool>false</bool>
-                       </property>
-                       <property name="flat">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_13">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <widget class="QPushButton" name="button_B_meterScale">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>280</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">background-color: transparent;
+                 </property>
+                 <property name="text">
+                  <string>88.888.888.00</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="autoDefault">
+                  <bool>false</bool>
+                 </property>
+                 <property name="default">
+                  <bool>false</bool>
+                 </property>
+                 <property name="flat">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_A_meterScale">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
 border: 1px solid transparent;</string>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_10">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>40</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_14">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <spacer name="horizontalSpacer_11">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>18</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QProgressBar" name="meter_B">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>250</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>250</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                       <property name="maximum">
-                        <number>14</number>
-                       </property>
-                       <property name="value">
-                        <number>2</number>
-                       </property>
-                       <property name="textVisible">
-                        <bool>false</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_12">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Fixed</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="label_B_meter">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>60</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>14</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>S9+30</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="Line" name="line_4">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>5</height>
-                 </size>
-                </property>
-                <property name="lineWidth">
-                 <number>5</number>
-                </property>
-                <property name="midLineWidth">
-                 <number>5</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_18">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>18</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="meter_A">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>250</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>250</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="maximum">
+                  <number>14</number>
+                 </property>
+                 <property name="value">
+                  <number>2</number>
+                 </property>
+                 <property name="textVisible">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_15">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_A_meter">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>14</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>S9+30</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="lineWidth">
+             <number>5</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QWidget" name="VFOB" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="VFO_B">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetDefaultConstraint</enum>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <property name="spacing">
+                <number>2</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_B_mode">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>SSB</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <property name="sizeConstraint">
+                  <enum>QLayout::SetMinimumSize</enum>
+                 </property>
+                 <property name="spacing">
+                  <number>2</number>
+                 </property>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_B_bw">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>BW:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_B_fc">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fc:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QPushButton" name="button_B_bw">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font/>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
+border: 1px solid transparent;
+Text-align: left
+</string>
+                   </property>
+                   <property name="text">
+                    <string>400Hz</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QPushButton" name="button_B_fc">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font/>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
+border: 1px solid transparent;
+Text-align: left</string>
+                   </property>
+                   <property name="text">
+                    <string>1.6k</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="label_B_rit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>RIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QLabel" name="label_B_xit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>27</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>XIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>15</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="button_B_rx">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
+border: 1px solid transparent;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="button_B_tx">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>55</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
+border: 1px solid transparent;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <property name="spacing">
+                <number>5</number>
+               </property>
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_B_freq">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>400</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>400</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Waree</family>
+                   <pointsize>32</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="acceptDrops">
+                  <bool>false</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">border: 1px solid transparent;
+text-align: right;
+background-color: transparent
+
+</string>
+                 </property>
+                 <property name="text">
+                  <string>88.888.888.00</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="autoDefault">
+                  <bool>false</bool>
+                 </property>
+                 <property name="default">
+                  <bool>false</bool>
+                 </property>
+                 <property name="flat">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="button_B_meterScale">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: transparent;
+border: 1px solid transparent;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>18</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="meter_B">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>250</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>250</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="maximum">
+                  <number>14</number>
+                 </property>
+                 <property name="value">
+                  <number>2</number>
+                 </property>
+                 <property name="textVisible">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_B_meter">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>60</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>14</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>S9+30</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QwtPlot" name="A_FFT" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::MinimumExpanding</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>10</width>
-                <height>551</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="Line" name="line">
               <property name="minimumSize">
                <size>
-                <width>5</width>
-                <height>0</height>
+                <width>500</width>
+                <height>180</height>
                </size>
               </property>
-              <property name="lineWidth">
-               <number>10</number>
+             </widget>
+            </item>
+            <item>
+             <widget class="WaterfallPlot" name="A_waterfall" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+              <property name="minimumSize">
+               <size>
+                <width>500</width>
+                <height>180</height>
+               </size>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_11">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetDefaultConstraint</enum>
-            </property>
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QPushButton" name="button_split">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Split</string>
-              </property>
-              <property name="checkable">
+             <widget class="QwtPlot" name="B_FFT" native="true">
+              <property name="enabled">
                <bool>true</bool>
               </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_5">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
                <size>
-                <width>80</width>
-                <height>0</height>
+                <width>500</width>
+                <height>180</height>
                </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>PushButton</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_4">
+             <widget class="QwtPlot" name="B_waterfall" native="true">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
                <size>
-                <width>80</width>
-                <height>0</height>
+                <width>500</width>
+                <height>180</height>
                </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>PushButton</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_3">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>PushButton</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_6">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>PushButton</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>80</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>80</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>PushButton</string>
               </property>
              </widget>
             </item>
@@ -1875,6 +1697,20 @@ border: 1px solid transparent;</string>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QWidget</extends>
+   <header>qwt_plot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WaterfallPlot</class>
+   <extends>QWidget</extends>
+   <header>waterfallplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>
