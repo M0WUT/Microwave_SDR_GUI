@@ -16,7 +16,7 @@ vfo::vfo (
     QLabel *xitLabel,
     QStatusBar *statusBar,
     const char *dmaFileName,
-    QwtPlot *fft,
+    FftPlot *fft,
     WaterfallPlot *waterfall
 )
 {

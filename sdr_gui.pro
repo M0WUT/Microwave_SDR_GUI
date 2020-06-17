@@ -17,20 +17,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     dma_worker.cpp \
+    fftplot.cpp \
     main.cpp \
     mainwindow.cpp \
     number_keypad.cpp \
     spectrumdisplay.cpp \
+    statusregs.cpp \
     vfo.cpp \
     waterfalldata.cpp \
     waterfallplot.cpp
 
 HEADERS += \
     dma_worker.h \
+    fftplot.h \
     mainwindow.h \
     number_keypad.h \
     spectrumdisplay.h \
     src/json/json.hpp \
+    statusregs.h \
     vfo.h \
     waterfalldata.h \
     waterfallplot.h

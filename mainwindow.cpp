@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Confirm we have status / control comms with PL
+    this->_status = new StatusRegs(this, "/dev/statusregs");
+
     // Initialise VFOs
     vfoA = new vfo(
         ui->button_A_freq,
@@ -49,25 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->statusbar
     );*/
 
-    vfoA->set_freq(24e9);
-
-    // Read variables that will only be set once per boot
-    FILE *statusFile_p;
-    statusFile_p = fopen("/dev/status", "rw");
-
-    if(statusFile_p == NULL){
-        QMessageBox::critical(this, "Fatal Error", "Could not find /dev/status");
-        QApplication::quit();
-    }
-
-    fclose(statusFile_p);
-    std::ifstream i("/dev/status");
-    json j;
-    i >> j;
-    double x = j["bitstreamVersion"];
-    ui->label_bitstreamVersion->setNum(x);
-
-    ui->statusbar->showMessage("Main window loaded successfully", 5000);
+    vfoA->set_freq(28e6);
 
 }
 

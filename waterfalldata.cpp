@@ -20,14 +20,12 @@ WaterfallData::~WaterfallData()
 
 void WaterfallData::add_fft_data(const double *data, const uint32_t size)
 {
-    assert((size == _fftSize));  // FFT Data must be the expected size
-    // Move all previous FFTs one position closer to 0th position
-    memmove(_fftData, &_fftData[_fftSize], _fftSize * (_historySize - 1) * sizeof(double));
+    assert(size == _fftSize);  // FFT Data must be the expected size
+    // Move all previous FFTs one position away from 0th position
+    memmove(&_fftData[_fftSize], _fftData, _fftSize * (_historySize - 1) * sizeof(double));
 
-    // Insert new data to (now) blank space at end of _fftData
-    memcpy(&_fftData[(_historySize - 1) * _fftSize], data, _fftSize * sizeof(double));
-
-
+    // Insert new data to (now) blank space at start of _fftData
+    memcpy(_fftData, data, _fftSize * sizeof(double));
 }
 
 double WaterfallData::value(double x, double y) const
@@ -44,6 +42,5 @@ double WaterfallData::value(double x, double y) const
     unsigned int yLocation = (unsigned int) ((1.0 - y / yMax) * yLength);
     unsigned int xLocation = (unsigned int) (((x - xMin) / (xMax - xMin)) * xLength + 0.5);
     unsigned int location = yLocation * _fftSize + xLocation;
-    //qDebug() << y << yMax << yLength << yLocation << "\n";
     return _fftData[location];
 }

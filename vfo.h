@@ -10,8 +10,7 @@
 #include <qwt_plot.h>
 #include "spectrumdisplay.h"
 #include <QThread>
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
+#include <fftplot.h>
 
 
 #define MIN_FREQ ((unsigned long long) 100000)
@@ -39,7 +38,7 @@ public:
         QLabel *xitLabel,
         QStatusBar *statusBar,
         const char *dmaFileName,
-        QwtPlot *fft,
+        FftPlot *fft,
         WaterfallPlot *waterfall
 );
 

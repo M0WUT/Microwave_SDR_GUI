@@ -24,9 +24,10 @@ dma_worker::~dma_worker()
 
 void dma_worker::run()
 {
+    //qDebug() << "Reading\n";
     // Need 2x for symmetric half of FFT as well
-    int64_t tempData[2 * this->fftSize];
-    read(this->dmaFile, tempData,  2 * this->fftSize * sizeof(int64_t));
+    int64_t tempData[2048];
+    read(this->dmaFile, tempData, 2048 * sizeof(int64_t));
     // Convert to double for QwtPlot
 
     for(int i = 0; i < this->fftSize; i++){

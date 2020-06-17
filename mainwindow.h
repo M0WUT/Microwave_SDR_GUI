@@ -8,10 +8,11 @@
 #include "src/json/json.hpp"
 #include <QMessageBox>
 #include <QDebug>
+#include <fstream>
 #include "vfo.h"
 #include "number_keypad.h"
 #include <QFontDatabase>
-
+#include <statusregs.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -49,6 +50,7 @@ private:
     Ui::MainWindow *ui;
     vfo *vfoA;
     vfo *vfoB;
+    StatusRegs *_status;
 
 };
 #endif // MAINWINDOW_H

@@ -1,75 +1,60 @@
 #include "spectrumdisplay.h"
 
-spectrumDisplay::spectrumDisplay(const char *dmaFileName, QwtPlot *fft, WaterfallPlot *waterfall)
+spectrumDisplay::spectrumDisplay(const char *dmaFileName, FftPlot *fft, WaterfallPlot *waterfall)
 {
 
-    this->fft = fft;
-    this->fft->setAxisScale(QwtPlot::xBottom, 0, FFT_SIZE);
-    this->fft->setAxisScale(QwtPlot::yLeft, -135, -40);
-
-    this->waterfall = waterfall;
-    this->waterfall->initialise(FFT_SIZE, 100, -135, -40);
+    this->_fft = fft;
+    this->_fft->initialise(FFT_SIZE, -135, -40, 28e6, 1000);
 
 
+    this->_waterfall = waterfall;
+    this->_waterfall->initialise(FFT_SIZE, 100, -135, -40);
 
-    this->worker = new dma_worker(dmaFileName, FFT_SIZE);
+    this->_worker = new dma_worker(dmaFileName, FFT_SIZE);
 
-    this->fftCurve = new QwtPlotCurve();
-
-    // Populate dummy axis data
-    for(int i = 0; i < FFT_SIZE; i++) {
-        this->x[i] = i;
-    }
-
-    // Set Curve properties
-    this->fftCurve->setPen(Qt::green, 1);
-    this->fftCurve->attach(this->fft);
-
-
-
-    // Enable Grid
-    QwtPlotGrid *grid = new QwtPlotGrid();
-    grid->setPen(0x666666);
-    grid->attach(this->fft);
 
     // Setup DMA Thread
-    this->dmaThread = new QThread;
-    this->worker->moveToThread(this->dmaThread);
+    this->_dmaThread = new QThread;
+    this->_worker->moveToThread(this->_dmaThread);
 
     // Connect Signals and Slots
     connect(
-        this->dmaThread, &QThread::started,
-        this->worker, &dma_worker::run
+        this->_dmaThread, &QThread::started,
+        this->_worker, &dma_worker::run
     );
 
     connect(
         this, &spectrumDisplay::start_dma,
-        this->worker, &dma_worker::run
+        this->_worker, &dma_worker::run
     );
 
     connect(
-        this->worker, &dma_worker::ready,
+        this->_worker, &dma_worker::ready,
         this, &spectrumDisplay::process_dma
     );
 
     connect(
-        this->dmaThread, &QThread::finished,
-        this->worker, &dma_worker::deleteLater
+        this->_dmaThread, &QThread::finished,
+        this->_worker, &dma_worker::deleteLater
     );
 
-    this->dmaThread->start();
+    this->_dmaThread->start();
 
 }
 
 spectrumDisplay::~spectrumDisplay()
 {
-    this->dmaThread->quit();
+    this->_dmaThread->quit();
+}
+
+void spectrumDisplay::set_freq(unsigned long long freq)
+{
+    this->_fft->set_freq(freq);
 }
 
 void spectrumDisplay::process_dma(double *data)
 {
-    this->fftCurve->setSamples(x, data, FFT_SIZE);
-    this->fft->replot();
-    this->waterfall->add_fft_data(data, FFT_SIZE);
+    this->_fft->set_data(data, FFT_SIZE);
+    this->_waterfall->add_fft_data(data, FFT_SIZE);
     emit(start_dma());
 }

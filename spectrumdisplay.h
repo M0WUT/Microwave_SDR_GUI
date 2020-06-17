@@ -2,24 +2,11 @@
 #define SPECTRUMDISPLAY_H
 
 #include <QObject>
-#include <qwt_plot.h>
-#include <qwt_plot_curve.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <time.h>
-#include <errno.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <assert.h>
 #include <dma_worker.h>
 #include <QThread>
-#include <qwt_plot_grid.h>
-#include <waterfalldata.h>
-#include <qwt_plot_spectrogram.h>
-#include <qwt_scale_widget.h>
-#include <qwt_color_map.h>
 #include <waterfallplot.h>
+#include <fftplot.h>
+#include <sys/ioctl.h>
 
 
 
@@ -30,9 +17,10 @@ class spectrumDisplay : public QObject {
     Q_OBJECT
 
 public:
-    spectrumDisplay(const char *dmaFileName, QwtPlot *fft, WaterfallPlot *waterfall);
+    spectrumDisplay(const char *dmaFileName, FftPlot *fft, WaterfallPlot *waterfall);
     ~spectrumDisplay();
-    QwtPlotCurve *fftCurve;
+    void set_freq(unsigned long long freq);
+
 
 signals:
     void start_dma();
@@ -41,12 +29,10 @@ public slots:
     void process_dma(double *data);
 
 private:
-    double x[FFT_SIZE];
-    double fftData[FFT_SIZE];
-    QwtPlot *fft;
-    WaterfallPlot *waterfall;
-    dma_worker *worker;
-    QThread *dmaThread;
+    FftPlot *_fft;
+    WaterfallPlot *_waterfall;
+    dma_worker *_worker;
+    QThread *_dmaThread;
 
 
 };

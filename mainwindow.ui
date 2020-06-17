@@ -1192,7 +1192,7 @@ border: 1px solid transparent;</string>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <widget class="QwtPlot" name="A_FFT" native="true">
+             <widget class="FftPlot" name="A_FFT" native="true">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1708,6 +1708,12 @@ border: 1px solid transparent;</string>
    <class>WaterfallPlot</class>
    <extends>QWidget</extends>
    <header>waterfallplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FftPlot</class>
+   <extends>QWidget</extends>
+   <header>fftplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
