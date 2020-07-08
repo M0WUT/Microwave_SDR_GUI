@@ -13,6 +13,7 @@
 #include <iostream>
 #include <fstream>
 #include <QDebug>
+#include <string>
 
 #define IOCTL_SET_ADDRESS _IO(202, 0)
 

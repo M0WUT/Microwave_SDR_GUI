@@ -7,6 +7,8 @@
 #include <waterfallplot.h>
 #include <fftplot.h>
 #include <sys/ioctl.h>
+#include <statusregs.h>
+#include <pl_addresses.h>
 
 
 
@@ -17,9 +19,16 @@ class spectrumDisplay : public QObject {
     Q_OBJECT
 
 public:
-    spectrumDisplay(const char *dmaFileName, FftPlot *fft, WaterfallPlot *waterfall);
+    spectrumDisplay(
+            const char *dmaFileName,
+            FftPlot *fft,
+            WaterfallPlot *waterfall,
+            StatusRegs *status
+
+    );
     ~spectrumDisplay();
     void set_freq(unsigned long long freq);
+    uint32_t calculate_if_freq(uint32_t freq);
 
 
 signals:
@@ -33,6 +42,7 @@ private:
     WaterfallPlot *_waterfall;
     dma_worker *_worker;
     QThread *_dmaThread;
+    StatusRegs *_status;
 
 
 };

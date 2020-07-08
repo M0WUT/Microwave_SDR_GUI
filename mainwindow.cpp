@@ -31,7 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->statusbar,
         "/dev/fft_dma",
         ui->A_FFT,
-        ui->A_waterfall
+        ui->A_waterfall,
+        this->_status
     );
     /*
 

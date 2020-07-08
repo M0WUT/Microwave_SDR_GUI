@@ -13,7 +13,7 @@
 #include "number_keypad.h"
 #include <QFontDatabase>
 #include <statusregs.h>
-
+#include <adau1361.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

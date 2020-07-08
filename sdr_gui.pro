@@ -16,8 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    adau1361.cpp \
     dma_worker.cpp \
     fftplot.cpp \
+    iic.cpp \
     main.cpp \
     mainwindow.cpp \
     number_keypad.cpp \
@@ -28,10 +30,13 @@ SOURCES += \
     waterfallplot.cpp
 
 HEADERS += \
+    adau1361.h \
     dma_worker.h \
     fftplot.h \
+    iic.h \
     mainwindow.h \
     number_keypad.h \
+    pl_addresses.h \
     spectrumdisplay.h \
     src/json/json.hpp \
     statusregs.h \

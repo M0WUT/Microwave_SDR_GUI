@@ -11,6 +11,8 @@
 #include "spectrumdisplay.h"
 #include <QThread>
 #include <fftplot.h>
+#include <statusregs.h>
+#include <pl_addresses.h>
 
 
 #define MIN_FREQ ((unsigned long long) 100000)
@@ -39,7 +41,8 @@ public:
         QStatusBar *statusBar,
         const char *dmaFileName,
         FftPlot *fft,
-        WaterfallPlot *waterfall
+        WaterfallPlot *waterfall,
+        StatusRegs *status
 );
 
     ~vfo();
@@ -75,7 +78,7 @@ private:
     QLabel *xitLabel;
     QStatusBar* statusBar;
     spectrumDisplay *spectrum;
-
+    StatusRegs *_status;
 
     // VFO freq
     unsigned long long freq;
@@ -93,9 +96,12 @@ private:
     int fc;
     int bw;
 
-    //RIT / XIT settings
+    // RIT / XIT settings
     int rit;
     int xit;
+
+    // ADC settings
+    double _adcfreq;
 
 };
 

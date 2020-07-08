@@ -16,7 +16,6 @@ StatusRegs::StatusRegs(QWidget *parent, const char *filename)
     minorVersion = y & 0xFF;
 
     qDebug() << "INFO: FPGA Firmware detected. Version" << majorVersion << "." << minorVersion << "\n";
-
 }
 
 StatusRegs::~StatusRegs()
@@ -36,7 +35,10 @@ uint32_t StatusRegs::read(unsigned int address)
 
 void StatusRegs::write(unsigned int address, uint32_t data)
 {
-    // @TODO
+    _set_address(address);
+    std::string str = std::to_string(data);
+    ::write(_fd, str.c_str(), str.length());
+
 }
 
 void StatusRegs::_set_address(int address)

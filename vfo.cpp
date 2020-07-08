@@ -17,7 +17,8 @@ vfo::vfo (
     QStatusBar *statusBar,
     const char *dmaFileName,
     FftPlot *fft,
-    WaterfallPlot *waterfall
+    WaterfallPlot *waterfall,
+    StatusRegs *status
 )
 {
     // Copy GUI references into self
@@ -35,7 +36,8 @@ vfo::vfo (
     this->ritLabel = ritLabel;
     this->xitLabel = xitLabel;
     this->statusBar = statusBar;
-    this->spectrum = new spectrumDisplay(dmaFileName, fft, waterfall);
+    this->spectrum = new spectrumDisplay(dmaFileName, fft, waterfall, status);
+    this->_status = status;
 
 
     QString filename = ":resources/img/scale_s_meter";
@@ -45,14 +47,14 @@ vfo::vfo (
     this->meterScale->setIconSize(QSize(280, 28));
     this->meterScale->setIcon(icon);
 
+    this->_adcfreq = 80e6;
+
     this->set_rx_enabled(1);
     this->set_tx_enabled(0);
 
     this->set_s_meter(13);
     this->set_rit(0);
     this->set_xit(0);
-
-    this->set_freq(100e6);
 }
 
 vfo::~vfo()
@@ -94,8 +96,16 @@ void vfo::set_freq(unsigned long long freq)
     }
 
 
+
+    double fftFreq = this->spectrum->calculate_if_freq(freq);
+    qDebug() << fftFreq << endl;
+
+    this->_status->write(ADDRESS_FFTACC, fftFreq * pow(2, 32) / _adcfreq);
+    this->spectrum->set_freq(freq);
+
     QString text;
     text.setNum(freq);
+
     int originalLength = text.length();
     for(int i = 3; i < originalLength; i += 3){
         text.insert(originalLength - i, '.');
