@@ -17,6 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     adau1361.cpp \
+    adau1361_input_channel.cpp \
+    adau1361_output_channel.cpp \
+    adau1361_pll.cpp \
     dma_worker.cpp \
     fftplot.cpp \
     iic.cpp \
@@ -31,6 +34,10 @@ SOURCES += \
 
 HEADERS += \
     adau1361.h \
+    adau1361_common.h \
+    adau1361_input_channel.h \
+    adau1361_output_channel.h \
+    adau1361_pll.h \
     dma_worker.h \
     fftplot.h \
     iic.h \

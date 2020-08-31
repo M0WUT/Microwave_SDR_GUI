@@ -16,667 +16,89 @@
 */
 #include "adau1361.h"
 
-pll_settings::pll_settings(adau1361 *parent)
+
+adau1361::adau1361(const char *iicFile, const int slaveAddress)
 {
-    assert(parent != NULL);
-    this->parent = parent;
-    this->set_mode(PLL_DISABLED);
-    this->set_multiplier(2, 0, 1);  // 2 + 0/1
-    this->set_input_divider(1);
-    this->set_core_clock_ratio(FSx256);
-    this->update();
+    this->_iic = new iic(iicFile);
+    assert (_iic != NULL);
+    this->_iic->set_slave_address(slaveAddress);
+    this->_pll = new adau1361_pll(this->_iic);
+    assert (_pll != NULL);
+    this->_pll->apply_settings();
+    // Force disable jack detect as AD admit it doesn't work
+    // source: https://ez.analog.com/dsp/sigmadsp/f/q-a/66306/jack-detection-with-adau1361
+    this->_iic->write_single(ADAU1361_REG_JACK_DETECT, 0);
+
+
+    // Load config with everything muted as default
+
+    // Input channels
+    _leftInputChannel = new adau1361_input_channel(LEFT_CHANNEL, this->_iic);
+    assert (_leftInputChannel != NULL);
+    _rightInputChannel = new adau1361_input_channel(RIGHT_CHANNEL, this->_iic);
+    assert (_rightInputChannel != NULL);
+
+    _leftInputChannel->set_input(INPUT_DISABLED);
+    _rightInputChannel->set_input(INPUT_DISABLED);
+
+    // Output channels
+
+
+
+    // Generic settings
+    this->set_operational_mode(NORMAL);
+    enable_mic_bias(false);
+
 }
 
-void pll_settings::set_mode(pll_mode_t mode)
+void adau1361::set_operational_mode(op_mode_t mode)
 {
-    assert (mode == PLL_DISABLED);  // Haven't implemented the other modes yet
-    this->mode = mode;
-}
-
-void pll_settings::set_multiplier(int integer, uint16_t numerator, uint16_t denominator)
-{
-    assert (denominator != 0);  // Don't want divide by 0
-    assert ((integer > 1) && (integer < 9));  // 2 <= integer <= 8
-    this->integer = integer;
-    this->numerator = numerator;
-    this->denominator = denominator;
-}
-
-void pll_settings::set_input_divider(int divider)
-{
-    assert ((0 < divider) && (divider < 5));
-    this->inputDivider = divider;
-}
-
-void pll_settings::set_core_clock_ratio(core_clock_ratio_t ratio)
-{
-    this->coreClockRatio = ratio;
-}
-
-void pll_settings::update()
-{
-    uint8_t x[6];  // Generic data array
-    uint8_t data;  // Generic register for data to send
-
-    ////////////////
-    // Update PLL //
-    ////////////////
-
-    // Disable core clock
-    this->parent->iic()->write_single(ADAU1361_REG_CLOCK_CONTROL, 0);
-
-    // Update PLL - must be written to as block of 6 bytes
-    x[0] = (denominator >> 8) & 0xFF;
-    x[1] = (denominator) & 0xFF;
-    x[2] = (numerator >> 8) & 0xFF;
-    x[3] = (numerator) & 0xFF;
-    x[4] = 	((integer << 3) & 0x78) |
-            (((inputDivider - 1) << 1) & 0x6) |
-            (mode == PLL_FRACTIONAL ? 1 : 0);
-    x[5] = (mode != PLL_DISABLED ? 1 : 0);
-
-     this->parent->iic()->write_block(ADAU1361_REG_PLL_CONTROL, x, 6);
-
-    // TODO: Check PLL Lock bit - this is what's preventing PLL being used
-
-    // Update Clock Control register
-    data = 0;
-
-    // Enable the PLL if needed
-    if  (mode != PLL_DISABLED) {
-        data |= (1 << 3);
-    }
-
-    // Set Core Clock Divider ratio
-    switch(coreClockRatio) {
-        case FSx256:
-            data |= 0b00 << 1;
-            break;
-        case FSx512:
-            data |= 0b01 << 1;
-            break;
-        case FSx768:
-            data |= 0b10 << 1;
-            break;
-        case FSx1024:
-            data |= 0x11 << 1;
-            break;
-    }
-
-    // Enable the core clock
-    data |= 0x01;
-
-     this->parent->iic()->write_single(ADAU1361_REG_CLOCK_CONTROL, data);
-}
-
-
-
-
-
-// Load default settings
-static void adau1361_load_defaults(struct adau1361_local *dev_p){
-
-    // I2C Device address
-    dev_p->slave_address = 0x38;
-
-    // PLL
-    dev_p->pll.pll_mode = PLL_DISABLED;
-    dev_p->pll.pll_integer = 2;
-    dev_p->pll.pll_numerator = 0;
-    dev_p->pll.pll_denominator = 1;
-    dev_p->pll.pll_input_divider = 1;
-
-    dev_p->pll.core_clock_ratio = FSx256;
-
-
-    // Inputs
-    //dev_p->mic_detect_enabled = 0;
-    dev_p->operational_mode = NORMAL;
-    dev_p->left_record_mixer.input_mode = IN_N;
-    //dev_p->left_record_mixer.gain = 0;
-    dev_p->right_record_mixer.input_mode = INPUT_DISABLED;
-
-    // Misc
-    dev_p->bclk_pol = FALLING_EDGE;
-    dev_p->lrclk_pol = RISING_EDGE;
-
-    //Outputs
-    dev_p->left_playback_mixer.output_mode = LEFT_DAC;
-    //dev_p->left_playback_mixer.gain = 0;
-    dev_p->right_playback_mixer.output_mode = RIGHT_DAC;
-    //dev_p->right_playback_mixer.gain = 0;
-
-    dev_p->headphones.enabled = 1;
-    dev_p->headphones.muted = 0;
-    dev_p->headphones.left_volume = 63;
-    dev_p->headphones.right_volume = 63;
-    dev_p->line_out.muted = 1;
-}
-
-// Writes all settings in adau1361_local to the device
-static int adau1361_update_full(struct adau1361_local *dev_p){
-
-
-    // Disable Jack detect - errata says this doesn't work properly
-    iic_write_single(dev_p->iic, ADAU1361_REG_JACK_DETECT, 0x00);
-
-    // Record Power Management
-    switch(dev_p->operational_mode) {
+    // Data[0] is for record power managment
+    // Data[1] is for playback power management
+    uint8_t data[2];
+    switch(mode) {
         case NORMAL:
-            data = 0;
+            data[0] = 0;
+            data[1] = 0;
             break;
         case EXTREME_POWER_SAVING:
-            data = 0b01110;
+            data[0] = 0b00001110;
+            data[1] = 0b01011100;
             break;
         case POWER_SAVING:
-            data = 0b11110;
+            data[0] = 0b00011110;
+            data[1] = 0b11111100;
             break;
         case ENHANCED_PERFORMANCE:
-            data = 0b101000;
+            data[0] = 0b00101000;
+            data[1] = 0b10101000;
             break;
-    }
-    iic_write_single(dev_p->iic, ADAU1361_REG_REC_PWR_MGMT, data);
+    };
 
-    // Record Mixer Left Control Registers
-    // TODO implement gain control
-    switch(dev_p->left_record_mixer.input_mode) {
-        case DIGITAL_MICROPHONE:  // Deliberate fallthrough
-        case INPUT_DISABLED:
-            x[0] = 0;  // Mute LINP, LINN and disable mixer
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_P:
-            x[0] = 0b01010001;  // 0dB gain for LINP, mute LINN
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_N:
-            x[0] = 0b00001011;  // 0dB gain for LINN, mute LINP
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_DIFF:
-            x[0] = 0b00000001;  // Mute LINP, LINN and enable mixer
-            x[1] = 0b00001000;  // 0dB gain for DIFF, mute AUX
-            break;
-        case IN_AUX:
-            x[0] = 0b00000001;  // Mute LINP, LINN and enable mixer
-            x[1] = 0b00000101;  // Mute DIFF, 0dB gain for AUX
-            break;
-    }
+    this->_iic->write_single(ADAU1361_REG_REC_PWR_MGMT, data[0]);
+    if(this->_rightOutputChannel->enabled())
+        data[1] |= 2;
+    if(this->_leftOutputChannel->enabled())
+        data[1] |= 1;
+    this->_iic->write_single(ADAU1361_REG_PLAY_PWR_MGMT, data[1]);
+    _op_mode = mode;
+}
 
-    iic_write_block(dev_p->iic, ADAU1361_REG_REC_MIXER_L0, x, 2);
+adau1361::~adau1361()
+{
 
-    // Record Mixer Right Control Registers
-    // TODO implement gain control
-    switch(dev_p->right_record_mixer.input_mode) {
-        case DIGITAL_MICROPHONE:  // Deliberate fallthrough
-        case INPUT_DISABLED:
-            x[0] = 0;  // Mute LINP, LINN and disable mixer
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_P:
-            x[0] = 0b01010001;  // 0dB gain for LINP, mute LINN
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_N:
-            x[0] = 0b00001011;  // 0dB gain for LINN, mute LINP
-            x[1] = 0;  // Mute DIFF and AUX input
-            break;
-        case IN_DIFF:
-            x[0] = 0b00000001;  // Mute LINP, LINN and enable mixer
-            x[1] = 0b00001000;  // 0dB gain for DIFF, mute AUX
-            break;
-        case IN_AUX:
-            x[0] = 0b00000001;  // Mute LINP, LINN and enable mixer
-            x[1] = 0b00000101;  // Mute DIFF, 0dB gain for AUX
-            break;
-    }
+}
 
-    iic_write_block(dev_p->iic, ADAU1361_REG_REC_MIXER_R0, x, 2);
+void adau1361::enable_mic_bias(bool x)
+{
+    uint8_t data;
 
-    // Left differential input volume control
-    data = (0b010000 << 2);  // 0dB differential gain
-    if(dev_p->left_record_mixer.input_mode == IN_DIFF)
-        data |= 0b11;  // Enable and unmute differential input
-    else
-        data |= 0b00; // Disable and mute differential input
-    iic_write_single(dev_p->iic, ADAU1361_REG_LEFT_DIFF_VOL, data);
-
-    // Right differential input volume control
-    data = (0b010000 << 2);  // 0dB differential gain
-    if(dev_p->right_record_mixer.input_mode == IN_DIFF)
-        data |= 0b11;  // Enable and unmute differential input
-    else
-        data |= 0b00; // Disable and mute differential input
-    iic_write_single(dev_p->iic, ADAU1361_REG_RIGHT_DIFF_VOL, data);
-
-    // Microphone Bias
-    if(dev_p->mic_bias_enabled)
-        data = 1;
+    if(_op_mode == ENHANCED_PERFORMANCE)
+        data = (1 << 3);
     else
         data = 0;
-    if(dev_p->operational_mode == ENHANCED_PERFORMANCE)
-        data |= 0b1000;
-    iic_write_single(dev_p->iic, ADAU1361_REG_REC_MIC_BIAS, data);
 
-    // ALC Registers
-    // TODO Implement ALC control - for now disable it
-    x[0] = 0;  // Disable ALC for both channels, all other settings now irrelevant
-    x[1] = 0;
-    x[2] = 0;
-    x[3] = 0;
-    iic_write_block(dev_p->iic, ADAU1361_REG_ALC0, x, 4);
-
-    // Serial Port Control Registers
-    // TODO Implement control of these options rather than hardcoding
-    x[0] = 0;
-    if(dev_p->bclk_pol == RISING_EDGE)
-        x[0] |= (1 << 4);
-
-    if(dev_p->lrclk_pol == RISING_EDGE)
-        x[0] |= (1 << 3);
-
-    x[1] = (
-        (0b001 << 5) |  // 32 clock cycles per frame
-        (0 << 4) |  // ADC Left channel first
-        (0 << 3) |  // DAC Left channel first
-        (0 << 2) |  // MSB first
-        (0b01)  // 0 delay between edge of LRCLK and data
-    );
-    iic_write_block(dev_p->iic, ADAU1361_REG_SERIAL_PORT0, x, 2);
-
-    // TDM Converter control
-    // TODO Implement TDM data support
-    x[0] = 0;
-    x[1] = 0;
-    iic_write_block(dev_p->iic, ADAU1361_REG_CONV0, x, 2);
-
-    // ADC Control
-    // TODO Implement Nice ADC control and support for digital microphones
-    data = (
-        (0 << 6) |  // Normal ADC polarity
-        (1 << 5) |  // Enable ADC 2Hz HPF
-        (1 << 4) |  // Normal digital mic polarity
-        (0 << 3) | // Don't swap digital microphone channels
-        (0 << 2)  // Disable digital microphone
-    );
-
-    if(
-        dev_p->left_record_mixer.input_mode == DIGITAL_MICROPHONE ||
-        dev_p->right_record_mixer.input_mode == DIGITAL_MICROPHONE
-    ){
-        printf("ADAU1361: Digital microphone not yet implemented\n");
-        return -1;
-    }
-
-    if(dev_p->left_record_mixer.input_mode != INPUT_DISABLED)
-        data |= 0b01;
-
-    if(dev_p->right_record_mixer.input_mode != INPUT_DISABLED)
-        data |= 0b10;
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_ADC_CTL, data);
-
-    // Input digital volume
-    // TODO implement input digital volume control
-    x[0] = 0;
-    x[1] = 0;
-    iic_write_block(dev_p->iic, ADAU1361_REG_LEFT_DIG_VOL, x, 2);
-
-    // Left playback mixer
-    switch(dev_p->left_playback_mixer.output_mode) {
-        case OUTPUT_DISABLED:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to left mixer
-                (0 << 5) |  // Mute Left DAC to left mixer
-                (0b0000 << 1) |  // Mute Left AUX to left mixer
-                0  // Disable left mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to left mixer
-                0b0000  // Mute left input mixer to left mixer
-            );
-            break;
-
-        case LEFT_INPUT_MIXER:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to left mixer
-                (0 << 5) |  // Mute Left DAC to left mixer
-                (0b0000 << 1) |  // Mute Left AUX to left mixer
-                1  // Enable left mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to left mixer
-                0b0110  // 0dB gain from left input mixer to left mixer
-            );
-            break;
-
-        case RIGHT_INPUT_MIXER:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to left mixer
-                (0 << 5) |  // Mute Left DAC to left mixer
-                (0b0000 << 1) |  // Mute Left AUX to left mixer
-                1  // Enable left mixer
-            );
-            x[1] = (
-                (0b0110 << 4) |  // 0dB gain from right input mixer to left mixer
-                0b0000  // Mute left input mixer to left mixer
-            );
-            break;
-
-        case AUX:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to left mixer
-                (0 << 5) |  // Mute Left DAC to left mixer
-                (0b0110 << 1) |  // 0dB gain from Left AUX to left mixer
-                1  // Enable left mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute left input mixer to left mixer
-                0b0000  // Mute left input mixer to left mixer
-            );
-            break;
-
-        case LEFT_DAC:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to left mixer
-                (1 << 5) |  // Enable Left DAC to left mixer
-                (0b0000 << 1) |  // Mute Left AUX to left mixer
-                1  // Enable left mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to left mixer
-                0b0000  // Mute left input mixer to left mixer
-            );
-            break;
-
-        case RIGHT_DAC:
-            x[0] = (
-                (1 << 6) |  // Enable Right DAC to left mixer
-                (0 << 5) |  // Mute Left DAC to left mixer
-                (0b0000 << 1) |  // Mute Left AUX to left mixer
-                1  // Enable left mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to left mixer
-                0b0000  // Mute left input mixer to left mixer
-            );
-            break;
-    }
-    iic_write_block(dev_p->iic, ADAU1361_REG_PLAY_MIXER_L0, x, 2);
-
-    // Right Playback Mixer
-        // Left playback mixer
-    switch(dev_p->right_playback_mixer.output_mode) {
-        case OUTPUT_DISABLED:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to right mixer
-                (0 << 5) |  // Mute Left DAC to right mixer
-                (0b0000 << 1) |  // Mute Left AUX to right mixer
-                0  // Disable right mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to right mixer
-                0b0000  // Mute left input mixer to right mixer
-            );
-            break;
-
-        case LEFT_INPUT_MIXER:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to right mixer
-                (0 << 5) |  // Mute Left DAC to right mixer
-                (0b0000 << 1) |  // Mute Left AUX to right mixer
-                1  // Enable right mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to right mixer
-                0b0110  // 0dB gain from left input mixer to right mixer
-            );
-            break;
-
-        case RIGHT_INPUT_MIXER:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to right mixer
-                (0 << 5) |  // Mute Left DAC to right mixer
-                (0b0000 << 1) |  // Mute Left AUX to right mixer
-                1  // Enable right mixer
-            );
-            x[1] = (
-                (0b0110 << 4) |  // 0dB gain from right input mixer to right mixer
-                0b0000  // Mute left input mixer to right mixer
-            );
-            break;
-
-        case AUX:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to right mixer
-                (0 << 5) |  // Mute Left DAC to right mixer
-                (0b0110 << 1) |  // 0dB gain from Left AUX to right mixer
-                1  // Enable right mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute left input mixer to right mixer
-                0b0000  // Mute left input mixer to right mixer
-            );
-            break;
-
-        case LEFT_DAC:
-            x[0] = (
-                (0 << 6) |  // Mute Right DAC to right mixer
-                (1 << 5) |  // Enable Left DAC to right mixer
-                (0b0000 << 1) |  // Mute Left AUX to right mixer
-                1  // Enable right mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to right mixer
-                0b0000  // Mute left input mixer to right mixer
-            );
-            break;
-
-        case RIGHT_DAC:
-            x[0] = (
-                (1 << 6) |  // Enable Right DAC to right mixer
-                (0 << 5) |  // Mute Left DAC to right mixer
-                (0b0000 << 1) |  // Mute Left AUX to right mixer
-                1  // Disable right mixer
-            );
-            x[1] = (
-                (0b0000 << 4) |  // Mute right input mixer to right mixer
-                0b0000  // Mute left input mixer to right mixer
-            );
-            break;
-    }
-    iic_write_block(dev_p->iic, ADAU1361_REG_PLAY_MIXER_R0, x, 2);
-
-    // L/R Playback Mixer Left
-    // TODO allow for cross feed of signals - not sure why this is useful though
-    data = (
-        (0b00 << 3) |  // Mute right mixer into left line out
-        (0b10 << 1)  // 0dB loss from left line mixer to left line out
-    );
-    if(dev_p->line_out.muted == 0)
-        data |= 1;  // Enable output mixer
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_PLAY_LR_MIXER_LEFT, data);
-
-    // L/R Playback Mixer Right
-    // TODO allow for cross feed of signals - not sure why this is useful though
-    data = (
-        (0b10 << 3) |  // 0dB loss from right line mixer to right line out
-        (0b00 << 1)  // Mute left mixer into right line out
-    );
-    if(dev_p->line_out.muted == 0)
-        data |= 1;  // Enable output mixer
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_PLAY_LR_MIXER_RIGHT, data);
-
-    // Mono mixer
-    if(dev_p->headphones.enabled)
-        data = (
-            (0b00 << 1) |  // Commmon mode ouput
-            1  // Enable mixer
-        );
-    else
-        data = 0;
-    iic_write_single(dev_p->iic, ADAU1361_REG_PLAY_LR_MIXER_MONO, data);
-
-    // Headphone Right
-    data = (dev_p->headphones.left_volume << 2) & 0xFC;
-    if(dev_p->headphones.muted == 0)
-        data |= (1 << 1);
-
-    if(dev_p->headphones.enabled == 1)
-        data |= (1 << 0);
-    iic_write_single(dev_p->iic, ADAU1361_REG_HP_LEFT_VOL, data);
-
-    // Headphone Right
-    data = (dev_p->headphones.right_volume << 2) & 0xFC;
-    if(dev_p->headphones.muted == 0)
-        data |= (1 << 1);
-
-    data |= 1;  // Set headphone outputs to headphone mode
-    iic_write_single(dev_p->iic, ADAU1361_REG_HP_RIGHT_VOL, data);
-
-    // Line Out left
-    data = (dev_p->line_out.left_volume << 2) & 0xFC;
-    if(dev_p->line_out.muted == 0)
-        data |= (1 << 1);
-
-    // Yes, I know this does nothing, just acknowledgement that this bit is 0
-    data |= 0;  // Set Line Out outputs into line out mode
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_LINE_LEFT_VOL, data);
-
-    // Line Out Right
-    data = (dev_p->line_out.right_volume << 2) & 0xFC;
-    if(dev_p->line_out.muted == 0)
-        data |= (1 << 1);
-
-    // Yes, I know this does nothing, just acknowledgement that this bit is 0
-    data |= 0;  // Set Line Out outputs into line out mode
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_LINE_RIGHT_VOL, data);
-
-    // Mono output
-    // TODO: Add support for MONO audio rather than just headphone common mode
-    if(dev_p->headphones.enabled)
-        data = (
-            (1 << 1) |  // Unmute mono output
-            1  // Headphone mode
-        );
-    iic_write_single(dev_p->iic, ADAU1361_REG_MONO_OUTPUT, data);
-
-    // Playback Pop/Click suppression
-    data = (
-        (0 << 3) |  // Enable pop suppression
-        0b00  // Default slew rate coz I don't know better
-    );
-    if(
-        dev_p->operational_mode == POWER_SAVING ||
-        dev_p->operational_mode == EXTREME_POWER_SAVING
-    ) {
-        data |= (1 << 4);  // Enable low power click suppression
-    }
-    iic_write_single(dev_p->iic, ADAU1361_REG_POP_SUPRESS, data);
-
-    // Playback Power Management
-    switch(dev_p->operational_mode){
-        case NORMAL:
-            data = (
-                (0b00 << 6) |
-                (0b00 << 4) |
-                (0b00 << 2)
-            );
-            break;
-        case EXTREME_POWER_SAVING:
-            data = (
-                (0b01 << 6) |
-                (0b01 << 4) |
-                (0b11 << 2)
-            );
-            break;
-        case POWER_SAVING:
-            data = (
-                (0b11 << 6) |
-                (0b11 << 4) |
-                (0b11 << 2)
-            );
-            break;
-        case ENHANCED_PERFORMANCE:
-            data = (
-                (0b10 << 6) |
-                (0b10 << 4) |
-                (0b10 << 2)
-            );
-            break;
-    }
-    if(dev_p->right_playback_mixer.output_mode != OUTPUT_DISABLED)
-        data |= (1 << 1);
-
-    if(dev_p->left_playback_mixer.output_mode != OUTPUT_DISABLED)
-        data |= (1 << 0);
-
-    iic_write_single(dev_p->iic, ADAU1361_REG_PLAY_PWR_MGMT, data);
-
-    // DAC Control
-    x[0] = 0;
-    if(
-        dev_p->left_playback_mixer.output_mode == LEFT_DAC ||
-        dev_p->right_playback_mixer.output_mode == LEFT_DAC
-    ) {
-        x[0] |= 0b01;
-    }
-
-    if(
-        dev_p->left_playback_mixer.output_mode == RIGHT_DAC ||
-        dev_p->right_playback_mixer.output_mode == RIGHT_DAC
-    ) {
-        x[0] |= 0b10;
-    }
-    x[1] = 0;
-    x[2] = 0;
-    iic_write_block(dev_p->iic, ADAU1361_REG_DAC0, x, 3);
-
-    // Serial input pin settings
-    iic_write_single(dev_p->iic, ADAU1361_REG_SERIAL_PORT_PAD, 0xAA);  // No pull up/down
-
-    // Control port pin settings
-    iic_write_single(dev_p->iic, ADAU1361_REG_CONTROL_PORT_PAD0, 0xAA);  // No pull up/down
-    iic_write_single(dev_p->iic, ADAU1361_REG_CONTROL_PORT_PAD1, 0x0);  // Low drive strength
-
-    // Jack detect pin settings
-    data = (
-        (0 << 5) |  // Low drive strength
-        (0b10 << 2)  // No pull up-down
-    );
-    iic_write_single(dev_p->iic, ADAU1361_REG_JACK_DETECT_PIN, data);
-
-    // Dejitter
-    iic_write_single(dev_p->iic, ADAU1361_REG_DEJITTER, 0x03);  // Don't really know so use defaults
-
-    return 0;
-}
-
-static int adau1361_init_device(struct adau1361_local *dev_p) {
-    adau1361_load_defaults(dev_p);
-    dev_p->iic = open("/dev/i2c-2", O_RDWR);
-    if(dev_p->iic < 0) {
-        printf("Error opening ADAU1361 I2C file\n");
-        return -1;
-    }
-    ioctl(dev_p->iic, I2C_SLAVE_FORCE, dev_p->slave_address);
-    adau1361_update_full(dev_p);
-    return 0;
-}
-
-
-
-adau1361::adau1361()
-{
-    this->_iic = new class iic("/dev/i2c-2");
-    this->_pll = new pll_settings(this);
-}
-
-iic *adau1361::iic()
-{
-    return this->_iic;
+    data |= x;
+    _iic->write_single(ADAU1361_REG_REC_MIC_BIAS, data);
+    _micBiasEnabled = x;
 }
