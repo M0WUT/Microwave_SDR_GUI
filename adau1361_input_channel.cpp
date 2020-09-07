@@ -58,6 +58,20 @@ void adau1361_input_channel::set_input(adc_input_t input)
     _iic->write_single(address, x[0]);
 
     // ALC
+    if(_input != IN_DIFF) {
+        x[0] = 0;  // ALC setting irrelvant as disabled
+        x[1] = 0;
+        x[2] = 0;
+        x[3] = 0;
+    }
+    else
+        assert (false); // @TODO Not yet implemented
+
+    _iic->write_block(ADAU1361_REG_ALC0, x, 4);
+
+    // ADC Enable
+
+    
 
 }
 
@@ -67,4 +81,14 @@ bool adau1361_input_channel::enabled()
         return true;
     else
         return false;
+}
+
+void adau1361_input_channel::set_volume(uint8_t volume)
+{
+    if(_channel == LEFT_CHANNEL)
+        _iic->write_single(ADAU1361_REG_LEFT_DIG_VOL, (255 - volume));
+    else
+        _iic->write_single(ADAU1361_REG_RIGHT_DIG_VOL, (255 - volume));
+    _volume = volume;
+
 }

@@ -13,7 +13,7 @@
 #include "number_keypad.h"
 #include <QFontDatabase>
 #include <statusregs.h>
-#include <adau1361.h>
+#include <audio_handler.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -51,6 +51,7 @@ private:
     vfo *vfoA;
     vfo *vfoB;
     StatusRegs *_status;
+    audio_handler *_audio;
 
 };
 #endif // MAINWINDOW_H

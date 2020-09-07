@@ -30,6 +30,7 @@ void iic::write_block(uint16_t reg_address, uint8_t *data, uint8_t data_length)
     x[0] = (reg_address >> 8) & 0xFF;
     x[1] = reg_address & 0xFF;
     for(i = 0; i < data_length; i++){
+        //qDebug() << "Writing data " << hex << data[i] << " to register 0x" << hex << reg_address + i;
         x[i+2] = data[i];
     }
 

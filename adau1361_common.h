@@ -63,6 +63,12 @@ typedef enum {NORMAL, EXTREME_POWER_SAVING, POWER_SAVING, ENHANCED_PERFORMANCE} 
 typedef enum {LEFT_CHANNEL, RIGHT_CHANNEL} channel_t;
 typedef enum {INPUT_DISABLED, IN_P, IN_N, IN_DIFF, IN_AUX, DIGITAL_MICROPHONE} adc_input_t;
 typedef enum {FALLING_EDGE, RISING_EDGE} clk_polarity_t;
-typedef enum {OUTPUT_DISABLED, LEFT_INPUT_MIXER, RIGHT_INPUT_MIXER, AUX, LEFT_DAC, RIGHT_DAC} output_t;
+typedef enum {LEFT_FIRST, RIGHT_FIRST} first_channel_t;
+typedef enum {MSB_FIRST, LSB_FIRST} bit_order_t;
+typedef enum {ENABLED, DISABLED} enabled_t;
+typedef enum {MASTER, SLAVE} master_t;
+typedef enum {CLOCK, PULSE} lrmod_t;
+typedef enum {OUTPUT_DISABLED, LEFT_INPUT_MIXER, RIGHT_INPUT_MIXER, AUX, LEFT_DAC, RIGHT_DAC} output_source_t;
+typedef enum {HEADPHONES, LINE_OUT, MONO} output_mode_t;
 
 #endif // ADAU1361_COMMON_H

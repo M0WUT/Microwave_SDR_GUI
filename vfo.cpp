@@ -98,9 +98,11 @@ void vfo::set_freq(unsigned long long freq)
 
 
     double fftFreq = this->spectrum->calculate_if_freq(freq);
-    qDebug() << fftFreq << endl;
 
     this->_status->write(ADDRESS_FFTACC, fftFreq * pow(2, 32) / _adcfreq);
+    _status->write(ADDRESS_DISPFREQ, freq);
+    _status->write(ADDRESS_DISPMODE, 2);
+    _status->write(ADDRESS_PHACC1, freq * pow(2, 32) / _adcfreq);
     this->spectrum->set_freq(freq);
 
     QString text;

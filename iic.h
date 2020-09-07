@@ -6,13 +6,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <QDebug>
 
 const int I2C_SLAVE_FORCE = 0x0706;  // Magic number to change I2C slave address - not my code
 
 class iic {
 
 public:
-    iic(const char* filename);
+    iic(const char *filename);
     ~iic();
     void set_slave_address (uint8_t address);
     void write_single(uint16_t reg_address, uint8_t data);

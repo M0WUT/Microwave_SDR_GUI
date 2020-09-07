@@ -10,7 +10,7 @@ adau1361_pll::~adau1361_pll() {}
 
 void adau1361_pll::set_mode(adau1361_pll::pll_mode_t mode)
 {
-      switch(mode){
+    switch(mode){
         case PLL_DISABLED:
             // Ensure PLL control registers have something in but values are irrelevant
             this->set_input_divider(1);
@@ -21,6 +21,8 @@ void adau1361_pll::set_mode(adau1361_pll::pll_mode_t mode)
             qDebug() << "Adau1361: Only supports PLL Disabled" << endl;
             assert (false);
     };
+    _mode = mode;
+
 }
 
 void adau1361_pll::set_multiplier(int integer, uint16_t numerator, uint16_t denominator)

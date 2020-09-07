@@ -55,11 +55,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     vfoA->set_freq(28e6);
 
+    _audio = new audio_handler("/dev/i2c-2", 0x38);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete(_audio);
+    delete(vfoA);
 }
 
 
