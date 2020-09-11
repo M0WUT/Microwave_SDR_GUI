@@ -454,20 +454,14 @@ border: 1px solid transparent;</string>
                 <number>5</number>
                </property>
                <item>
-                <widget class="QPushButton" name="button_A_freq">
+                <widget class="ClickableLabel" name="label_A_freq">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <property name="minimumSize">
-                  <size>
-                   <width>400</width>
-                   <height>45</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
                   <size>
                    <width>400</width>
                    <height>45</height>
@@ -481,30 +475,8 @@ border: 1px solid transparent;</string>
                    <bold>true</bold>
                   </font>
                  </property>
-                 <property name="acceptDrops">
-                  <bool>false</bool>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border: 1px solid transparent;
-text-align: right;
-background-color: transparent
-
-</string>
-                 </property>
                  <property name="text">
-                  <string>88.888.888.00</string>
-                 </property>
-                 <property name="checkable">
-                  <bool>false</bool>
-                 </property>
-                 <property name="autoDefault">
-                  <bool>false</bool>
-                 </property>
-                 <property name="default">
-                  <bool>false</bool>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
+                  <string>TextLabel</string>
                  </property>
                 </widget>
                </item>
@@ -1003,8 +975,9 @@ border: 1px solid transparent;</string>
                   <font>
                    <family>Waree</family>
                    <pointsize>32</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
+                   <weight>50</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="acceptDrops">
@@ -1012,6 +985,8 @@ border: 1px solid transparent;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">border: 1px solid transparent;
+font: Waree;
+font-size: 32;
 text-align: right;
 background-color: transparent
 
@@ -1715,6 +1690,11 @@ border: 1px solid transparent;</string>
    <extends>QWidget</extends>
    <header>fftplot.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>clickablelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

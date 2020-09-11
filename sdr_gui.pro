@@ -21,6 +21,7 @@ SOURCES += \
     adau1361_output_channel.cpp \
     adau1361_pll.cpp \
     audio_handler.cpp \
+    clickablelabel.cpp \
     dma_worker.cpp \
     fftplot.cpp \
     iic.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     adau1361_output_channel.h \
     adau1361_pll.h \
     audio_handler.h \
+    clickablelabel.h \
     dma_worker.h \
     fftplot.h \
     iic.h \

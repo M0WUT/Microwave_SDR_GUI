@@ -1,7 +1,6 @@
 #include "vfo.h"
 
-vfo::vfo (
-    QPushButton *freqButton,
+vfo::vfo (ClickableLabel *freqButton,
     QPushButton *rxButton,
     QPushButton *txButton,
     QLabel *fcLabel,
@@ -55,6 +54,8 @@ vfo::vfo (
     this->set_s_meter(13);
     this->set_rit(0);
     this->set_xit(0);
+
+    set_step_size(10);
 }
 
 vfo::~vfo()
@@ -108,13 +109,24 @@ void vfo::set_freq(unsigned long long freq)
     QString text;
     text.setNum(freq);
 
-    int originalLength = text.length();
-    for(int i = 3; i < originalLength; i += 3){
-        text.insert(originalLength - i, '.');
+
+    int stepIndex = log10(_stepSize);  // Index of char in "text" that should be underlined to indicate it's the step size
+    QString prettyText;
+
+    for(int i = 0; i < text.length(); i++) {
+        if(i == stepIndex) {
+            prettyText.prepend("<u>" + text[text.length() - 1 - i] + "</u>");
+        } else {
+            prettyText.prepend(text[text.length() - 1 - i]);
+        }
+
+        if ((i + 1) % 3 == 0)
+            prettyText.prepend(".");
     }
 
-    this->freqButton->setText(text);
+    this->freqButton->setText(prettyText);
 
+    _freq = freq;
 
 }
 
@@ -213,5 +225,21 @@ void vfo::set_xit(int x)
     } else {
         xitLabel->setStyleSheet("QLabel {color:#808080}");
     }
+}
+
+void vfo::increment()
+{
+    set_freq(_freq + _stepSize);
+}
+
+void vfo::decrement()
+{
+    set_freq(_freq - _stepSize);
+}
+
+void vfo::set_step_size(int step)
+{
+    assert (step % 10 == 0);
+    _stepSize = step;
 }
 

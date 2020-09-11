@@ -14,6 +14,7 @@
 #include <QFontDatabase>
 #include <statusregs.h>
 #include <audio_handler.h>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,7 +33,7 @@ private slots:
 
     void on_button_A_mode_clicked();
 
-    void on_button_A_freq_clicked();
+    void on_label_A_freq_clicked();
 
     void on_button_A_rx_clicked();
 
@@ -46,12 +47,15 @@ private slots:
 
     void on_button_A_meterScale_clicked();
 
+    void keyPressEvent(QKeyEvent *e);
+
 private:
     Ui::MainWindow *ui;
     vfo *vfoA;
     vfo *vfoB;
     StatusRegs *_status;
     audio_handler *_audio;
+
 
 };
 #endif // MAINWINDOW_H

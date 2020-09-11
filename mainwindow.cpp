@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialise VFOs
     vfoA = new vfo(
-        ui->button_A_freq,
+        ui->label_A_freq,
         ui->button_A_rx,
         ui->button_A_tx,
         ui->label_A_fc,
@@ -57,6 +57,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     _audio = new audio_handler("/dev/i2c-2", 0x38);
 
+    this->setFocusPolicy(Qt::StrongFocus);
+    this->grabKeyboard();
+
 }
 
 MainWindow::~MainWindow()
@@ -72,7 +75,7 @@ void MainWindow::on_button_aboutQt_clicked()
     QMessageBox::aboutQt(this, "Qt information");
 }
 
-void MainWindow::on_button_A_freq_clicked()
+void MainWindow::on_label_A_freq_clicked()
 {
     vfoA->run_keypad(this);
 }
@@ -137,4 +140,18 @@ void MainWindow::on_button_B_freq_clicked()
 void MainWindow::on_button_A_meterScale_clicked()
 {
     ;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    switch (e->key()) {
+        case Qt::Key_A:
+            vfoA->increment();
+            break;
+        case Qt::Key_B:
+            vfoA->decrement();
+            break;
+
+
+    }
 }

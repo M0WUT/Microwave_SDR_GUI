@@ -35,13 +35,13 @@ void WaterfallPlot::initialise(unsigned int fftSize, unsigned int historySize, d
     this->_spectrogram = new QwtPlotSpectrogram;
     this->_colourMap = new ColorMap_MultiColor();
     this->_spectrogram->setColorMap(this->_colourMap);
-    this->_spectrogram->setRenderThreadCount(0);
+    this->_spectrogram->setRenderThreadCount(4);
     this->_intensityAxis = axisWidget(QwtPlot::yRight);
     this->setAxisScale(QwtPlot::yRight, min, max);
     QwtInterval z = QwtInterval(min, max);
     this->_intensityAxis->setColorMap(z, this->_colourMap);
     this->_data = new WaterfallData(fftSize, historySize, min, max);
-    this->enableAxis(QwtPlot::xBottom, false);
+    this->enableAxis(QwtPlot::xBottom, true);
 
     this->_spectrogram->attach(this);
 }

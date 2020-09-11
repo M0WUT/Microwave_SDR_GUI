@@ -13,6 +13,8 @@
 #include <fftplot.h>
 #include <statusregs.h>
 #include <pl_addresses.h>
+#include <QTextDocument>
+#include <clickablelabel.h>
 
 
 #define MIN_FREQ ((unsigned long long) 100000)
@@ -25,7 +27,7 @@ class vfo : public QObject {
 
 public:
     vfo(
-        QPushButton *freqButton,
+        ClickableLabel *freqButton,
         QPushButton *rxButton,
         QPushButton *txButton,
         QLabel *fcLabel,
@@ -59,11 +61,14 @@ public:
     void set_s_meter(int x);
     void set_rit(int x);
     void set_xit(int x);
+    void increment();
+    void decrement();
+    void set_step_size(int step);
 
 private:
 
     // GUI references
-    QPushButton *freqButton;
+    ClickableLabel *freqButton;
     QPushButton *rxButton;
     QPushButton *txButton;
     QLabel *fcLabel;
@@ -81,8 +86,8 @@ private:
     StatusRegs *_status;
 
     // VFO freq
-    unsigned long long freq;
-    unsigned long long stepSize;
+    unsigned long long _freq;
+    unsigned long long _stepSize;
 
     // VFO mode
     mode_t mode;
