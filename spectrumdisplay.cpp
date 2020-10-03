@@ -4,11 +4,11 @@ spectrumDisplay::spectrumDisplay(const char *dmaFileName, FftPlot *fft, Waterfal
 {
 
     this->_fft = fft;
-    this->_fft->initialise(FFT_SIZE, -140, -40, 28e6, 38.147);
+    this->_fft->initialise(FFT_SIZE, -100, 0, 28e6, 38.147);
 
 
     this->_waterfall = waterfall;
-    this->_waterfall->initialise(FFT_SIZE, 100, -140, -40);
+    this->_waterfall->initialise(FFT_SIZE, 100, -100, 0);
 
     this->_worker = new dma_worker(dmaFileName, FFT_SIZE);
     this->_status = status;

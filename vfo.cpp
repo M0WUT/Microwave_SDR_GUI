@@ -72,6 +72,7 @@ void vfo::set_mode(vfo::mode_t mode)
 
 void vfo::set_freq(unsigned long long freq)
 {
+
     unsigned long long requestedFreq = freq;
     freq = std::min(freq, MAX_FREQ);
     freq = std::max(freq, MIN_FREQ);
@@ -98,12 +99,15 @@ void vfo::set_freq(unsigned long long freq)
 
 
 
-    double fftFreq = this->spectrum->calculate_if_freq(freq);
 
-    this->_status->write(ADDRESS_FFTACC, fftFreq * pow(2, 32) / _adcfreq);
+
+    unsigned long long  fftFreq = this->spectrum->calculate_if_freq(freq);
+
+    this->_status->write(ADDRESS_FFTACC, (double) (fftFreq << 32) / _adcfreq);
     _status->write(ADDRESS_DISPFREQ, freq);
     _status->write(ADDRESS_DISPMODE, 2);
-    _status->write(ADDRESS_PHACC1, freq * pow(2, 32) / _adcfreq);
+    _status->write(ADDRESS_PHACC1, (double) (freq << 32) / _adcfreq);
+
     this->spectrum->set_freq(freq);
 
     QString text;
@@ -123,6 +127,7 @@ void vfo::set_freq(unsigned long long freq)
         if ((i + 1) % 3 == 0)
             prettyText.prepend(".");
     }
+
 
     this->freqButton->setText(prettyText);
 

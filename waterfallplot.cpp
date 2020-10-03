@@ -19,9 +19,9 @@ class ColorMap_MultiColor : public QwtLinearColorMap
 public:
     ColorMap_MultiColor() : QwtLinearColorMap(Qt::darkCyan, Qt::white)
     {
-        addColorStop(0.25, Qt::cyan);
-        addColorStop(0.5, Qt::yellow);
-        addColorStop(0.75, Qt::red);
+        addColorStop(0.4, Qt::cyan);
+        addColorStop(0.6, Qt::yellow);
+        addColorStop(0.8, Qt::red);
     }
 };
 
