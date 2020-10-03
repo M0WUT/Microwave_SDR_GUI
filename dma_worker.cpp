@@ -1,6 +1,6 @@
 #include "dma_worker.h"
 
-dma_worker::dma_worker(const char *dmaFileName, int fftSize)
+dma_worker::dma_worker(spectrumDisplay *parent, const char *dmaFileName, int fftSize)
 {
     this->dmaFile = open(dmaFileName, O_RDONLY);
     if(this->dmaFile == -1){
@@ -13,6 +13,7 @@ dma_worker::dma_worker(const char *dmaFileName, int fftSize)
         qDebug() << "Could not allocate memory for DMA buffer" << endl;
         exit(-ENOMEM);
     }
+    this->_parent = parent;
 
 }
 
@@ -24,10 +25,8 @@ dma_worker::~dma_worker()
 
 void dma_worker::run()
 {
-    //qDebug() << "Reading\n";
-    // Need 2x for symmetric half of FFT as well
     int64_t tempData[2048];
-    read(this->dmaFile, tempData, 2048 * sizeof(int64_t));
+        read(this->dmaFile, tempData, 2048 * sizeof(int64_t));
     // Convert to double for QwtPlot
 
     for(int i = 0; i < this->fftSize; i++){
@@ -35,6 +34,9 @@ void dma_worker::run()
         double x_d = tempData[i] == 0 ? 1 : tempData[i];
         this->fftData[i] = 20 * log10(x_d) - 215;
     }
-    emit ready(this->fftData);
+    this->_parent->_fft->set_data(this->fftData, fftSize);
+    this->_parent->_waterfall->add_fft_data(this->fftData, fftSize);
+
+    emit ready();
 
 }

@@ -12,25 +12,29 @@
 #include <assert.h>
 #include <QDebug>
 #include <math.h>
+#include <spectrumdisplay.h>
+
+class spectrumDisplay;
 
 class dma_worker : public QObject
 {
     Q_OBJECT
 public:
-    dma_worker(const char *dmaFileName, int fftSize);
+    dma_worker(spectrumDisplay *parent, const char *dmaFileName, int fftSize);
     ~dma_worker();
 
 public slots:
     void run();
 
 signals:
-    void ready(double *data_p);
+    void ready();
 
 
 private:
     int dmaFile;
     int fftSize;
     double *fftData;
+    spectrumDisplay *_parent;
 };
 
 

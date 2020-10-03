@@ -14,9 +14,13 @@
 
 #define FFT_SIZE 1024
 
+class dma_worker;
+
 class spectrumDisplay : public QObject {
 
     Q_OBJECT
+
+    friend class dma_worker;
 
 public:
     spectrumDisplay(
@@ -35,7 +39,7 @@ signals:
     void start_dma();
 
 public slots:
-    void process_dma(double *data);
+    void process_dma();
 
 private:
     FftPlot *_fft;

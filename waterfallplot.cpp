@@ -11,7 +11,6 @@ void WaterfallPlot::add_fft_data(const double *data, const unsigned int size)
 {
     this->_data->add_fft_data(data, size);
     this->_spectrogram->setData(this->_data);
-    this->replot();
 }
 
 class ColorMap_MultiColor : public QwtLinearColorMap

@@ -26,7 +26,7 @@ void FftPlot::initialise(unsigned int fftSize, double minY, double maxY, double 
     this->_freq = (double *) malloc(_fftSize * sizeof(double));
     this->_minY = minY;
     this->_maxY = maxY;
-    this->set_freq(freqStart, freqStep);
+    this->set_freq(-0.5 * fftSize * freqStep, freqStep);
     this->setAxisScale(QwtPlot::xBottom, _freqStart, _freqStart + 1024 * _freqStep);
     //this->setAxisAutoScale(QwtPlot::xBottom,true);
     this->enableAxis(QwtPlot::xBottom);
@@ -37,7 +37,6 @@ void FftPlot::set_data(const double *data, unsigned int size)
 {
     assert (size == _fftSize);
     this->_curve->setSamples(_freq, data, _fftSize);
-    this->replot();
 }
 
 void FftPlot::set_freq(const double freqStart)
@@ -46,7 +45,7 @@ void FftPlot::set_freq(const double freqStart)
     for(unsigned int i = 0; i < _fftSize; i++) {
         _freq[i] = freqStart + i * _freqStep;
     }
-    this->setAxisScale(QwtPlot::xBottom, _freqStart, _freqStart + 1024 * _freqStep);
+    this->setAxisScale(QwtPlot::xBottom, _freqStart, _freqStart + _fftSize * _freqStep);
 }
 
 void FftPlot::set_freq(const double freqStart, const double freqStep)

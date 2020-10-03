@@ -55,7 +55,8 @@ vfo::vfo (ClickableLabel *freqButton,
     this->set_rit(0);
     this->set_xit(0);
 
-    set_step_size(10);
+    set_step_size(100);
+    _status->write(ADDRESS_DISPMODE, 2);
 }
 
 vfo::~vfo()
@@ -103,17 +104,17 @@ void vfo::set_freq(unsigned long long freq)
 
     unsigned long long  fftFreq = this->spectrum->calculate_if_freq(freq);
 
-    this->_status->write(ADDRESS_FFTACC, (double) (fftFreq << 32) / _adcfreq);
+    _status->write(ADDRESS_FFTACC, (double) (fftFreq << 32) / _adcfreq);
     _status->write(ADDRESS_DISPFREQ, freq);
-    _status->write(ADDRESS_DISPMODE, 2);
+
     _status->write(ADDRESS_PHACC1, (double) (freq << 32) / _adcfreq);
 
-    this->spectrum->set_freq(freq);
+    //this->spectrum->set_freq(freq);
 
     QString text;
     text.setNum(freq);
 
-
+    /*
     int stepIndex = log10(_stepSize);  // Index of char in "text" that should be underlined to indicate it's the step size
     QString prettyText;
 
@@ -127,9 +128,9 @@ void vfo::set_freq(unsigned long long freq)
         if ((i + 1) % 3 == 0)
             prettyText.prepend(".");
     }
+    */
 
-
-    this->freqButton->setText(prettyText);
+    //this->freqButton->setText(text);
 
     _freq = freq;
 
